@@ -1,0 +1,15 @@
+<p>
+  <strong>Title:</strong>
+  <%= @gossip.anonymous_author %>
+</p> 
+
+<p>
+  <strong>Text:</strong>
+  <%= @gossip.content %>
+</p>
+ 
+
+
+<%= link_to 'Edit', edit_gossip_path(@gossip) %> |
+<%= link_to 'Back', gossips_path %>
+
