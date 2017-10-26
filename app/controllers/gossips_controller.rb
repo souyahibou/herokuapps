@@ -13,7 +13,7 @@ class GossipsController < ApplicationController
 #      end
 
       #redirect_to gossip_path(@gossip)
-						@gossip = Gossip.new(params[:id])
+						@gossip = Gossip.new(gossip_params)
 						@gossip.anonymous_author = params[:anonymous_author]	
     						@gossip.content = params[:content]
 	 		        		@gossip.save
@@ -37,14 +37,18 @@ class GossipsController < ApplicationController
 
 
   def update
-
       @gossip = Gossip.find(params[:id])
- 
       if @gossip.update(gossip_params)
-         redirect_to @gossip
+	  @gossip.save
+	  redirect_to @gossip
       else
          render 'edit'
       end
+						#@gossip = Gossip.find(params[:id])
+						#@gossip.anonymous_author = params[:anonymous_author]	
+    						#@gossip.content = params[:content]
+	 		        		#@gossip.save
+						#redirect_to @gossip
   end
 
 
@@ -58,11 +62,8 @@ class GossipsController < ApplicationController
   private
     def gossip_params
       params.permit(:anonymous_author, :content)
+      #params.require(:gossip).permit(:anonymous_author, :content)
     end
 
 end
 
-
-    # @gossip.anonymous_author = @gossip.params[:anonymous_author]
-    # @gossip.content = @gossip.params[:content]
-    # @gossip.save
